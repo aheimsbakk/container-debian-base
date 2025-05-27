@@ -4,8 +4,8 @@ Multiple releases of Debian. See `matrix` in [`.forgejo/workflows/container.yaml
 
 ## This is a Mirror
 
-Orinates from Docker Hub
+Orinates from Docker Hub.
 
 ## Containerfile
 
-Look at the [Containerfile](Containerfile)
+Look at the [Containerfile](Containerfile).
