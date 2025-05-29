@@ -70,5 +70,5 @@ jobs:
           password: ${{ secrets.REGISTRY_PASS }}
 
       - name: Print container url when on main branch
-        if: github.ref == 'refs/heads/main' || || github.event_name == 'schedule'
+        if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
         run: echo "Image pushed to ${{ steps.push-container.outputs.registry-paths }}"
