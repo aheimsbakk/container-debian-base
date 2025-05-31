@@ -71,9 +71,9 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
         uses: redhat-actions/push-to-registry@v2
         with:
-          # image: ${{ steps.build-container.outputs.image }}
+          image: ${{ steps.build-container.outputs.image }}
           tags: ${{ steps.build-container.outputs.tags }}
-          # registry: ${{ env.REGISTRY_PATH }}
+          registry: ""
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
 
