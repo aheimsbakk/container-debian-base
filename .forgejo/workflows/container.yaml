@@ -62,14 +62,18 @@ jobs:
           build-args: |
             DEBIAN_RELEASE=${{ matrix.container.release }}
 
+      - name: Print tags
+        run: |
+          echo ${{ steps.build-container.outputs.tags }}
+
       - name: Push Container when on main branch
         id: push-container
         if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ steps.build-container.outputs.image }}
+          # image: ${{ steps.build-container.outputs.image }}
           tags: ${{ steps.build-container.outputs.tags }}
-          registry: ${{ env.REGISTRY_PATH }}
+          # registry: ${{ env.REGISTRY_PATH }}
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
 
