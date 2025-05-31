@@ -54,7 +54,7 @@ jobs:
         id: build-container
         uses: redhat-actions/buildah-build@v2
         with:
-          image: ${{ env.IMAGE_NAME }}
+          image: ${{env.REGISTRY_PATH}}/${{ env.IMAGE_NAME }}
           tags: ${{ matrix.container.tags }}
           archs: amd64, arm64
           containerfiles: |
@@ -69,7 +69,7 @@ jobs:
         with:
           image: ${{ steps.build-container.outputs.image }}
           tags: ${{ steps.build-container.outputs.tags }}
-          registry: ${{ env.REGISTRY_PATH }}
+          # registry: ${{ env.REGISTRY_PATH }}
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
 
