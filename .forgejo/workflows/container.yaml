@@ -62,10 +62,6 @@ jobs:
           build-args: |
             DEBIAN_RELEASE=${{ matrix.container.release }}
 
-      - name: Print tags
-        run: |
-          echo ${{ steps.build-container.outputs.tags }}
-
       - name: Push Container when on main branch
         id: push-container
         if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
