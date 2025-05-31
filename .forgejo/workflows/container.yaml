@@ -19,7 +19,7 @@ jobs:
       matrix:
         container:
           - release: bookworm
-            tags: latest bookworm
+            tags: bookworm
           - release: bookworm-slim
             tags: bookworm-slim
           - release: trixie
