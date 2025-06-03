@@ -2,8 +2,8 @@
 on:
   push:
     paths:
-      - '**/*.yaml'
-      - '**/*.yml'
+      - '.forgejo/**/*.yaml'
+      - '.forgejo/**/*.yml'
       - 'Containerfile'
       - 'Dockerfile'
   workflow_dispatch:
@@ -20,19 +20,11 @@ jobs:
         container:
           - extra_args: --build-arg=DEBIAN_RELEASE="bookworm"
             tags: bookworm latest
-            platform: linux/amd64,linux/arm64,linux/arm
-            containerfile: Containerfile
-          - extra_args: --build-arg=DEBIAN_RELEASE="bookworm-slim"
-            tags: bookworm-slim
-            platform: linux/amd64,linux/arm64,linux/arm
+            platform: linux/amd64,linux/arm64
             containerfile: Containerfile
           - extra_args: --build-arg=DEBIAN_RELEASE="trixie"
             tags: trixie
-            platform: linux/amd64,linux/arm64,linux/arm
-            containerfile: Containerfile
-          - extra_args: --build-arg=DEBIAN_RELEASE="trixie-slim"
-            tags: trixie-slim
-            platform: linux/amd64,linux/arm64,linux/arm
+            platform: linux/amd64,linux/arm64
             containerfile: Containerfile
 
     env:
