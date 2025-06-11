@@ -1,3 +1,3 @@
-ARG DEBIAN_RELEASE="bookworm"
+ARG RELEASE="bookworm"
 
-FROM docker.io/debian:${DEBIAN_RELEASE}
+FROM docker.io/debian:${RELEASE}
