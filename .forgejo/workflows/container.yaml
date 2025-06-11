@@ -10,7 +10,7 @@ on:
   schedule:
   - cron: '0 23 * * *'
 
-vars:
+env:
   CONTAINER_NAME: 'debian-base'
   CONTAINER_KEEP_COUNT: 6
 
@@ -24,14 +24,14 @@ jobs:
           - build-args: |
               RELEASE=bookworm
             tags: |
-              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ vars.CONTAINER_NAME }}:latest
-              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ vars.CONTAINER_NAME }}:bookworm
+              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:latest
+              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:bookworm
             platforms: linux/amd64,linux/arm64
             containerfile: Containerfile
           - build-args: |
               RELEASE=trixie
             tags: |
-              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ vars.CONTAINER_NAME }}:trixie
+              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:trixie
             platforms: linux/amd64,linux/arm64
             containerfile: Containerfile
 
@@ -76,6 +76,6 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
           package-type: container
-          package-name: ${{ vars.CONTAINER_NAME }}
-          min-versions-to-keep: ${{ vars.CONTAINER_KEEP_COUNT }}
+          package-name: ${{ env.CONTAINER_NAME }}
+          min-versions-to-keep: ${{ env.CONTAINER_KEEP_COUNT }}
           delete-only-untagged-versions: true
