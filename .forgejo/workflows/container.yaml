@@ -59,7 +59,7 @@ jobs:
           build-args: ${{ matrix.container.build-args }}
 
       - name: Clean up old versions
-        if: ${{ contains(github.api_url, 'github') }} && ( github.ref == 'refs/heads/main' || github.event_name == 'schedule' ) 
+        if: ${{ contains(github.api_url, 'github') && ( github.ref == 'refs/heads/main' || github.event_name == 'schedule' ) }} 
         uses: actions/delete-package-versions@v5
         with:
           package-type: container
