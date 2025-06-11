@@ -35,7 +35,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Login to Docker Hub
+      - name: Login to registry
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.REGISTRY_NAME }}
@@ -57,3 +57,12 @@ jobs:
           tags: ${{ matrix.container.tags }}
           file: ${{ matrix.container.containerfile }}
           build-args: ${{ matrix.container.build-args }}
+
+      - name: Clean up old versions
+        if: ${{ contains(github.api_url, 'github') }} && ( github.ref == 'refs/heads/main' || github.event_name == 'schedule' ) 
+        uses: actions/delete-package-versions@v5
+        with:
+          package-type: container
+          package-name: debian-base
+          min-versions-to-keep: 6
+          delete-only-untagged-versions: true
