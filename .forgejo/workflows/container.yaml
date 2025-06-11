@@ -39,12 +39,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Login to registry
+      - name: Login to non Github registry
+        if: ${{ ! contains(github.api_url, 'github' )
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.REGISTRY_NAME }}
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
+
+      - name: Login to Github registry
+        if: ${{ contains(github.api_url, 'github' )
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
