@@ -26,7 +26,6 @@ jobs:
           echo "container-name=${{ env.CONTAINER_NAME }}" >> "$GITHUB_OUTPUT"
           echo "Set container-name to: $DYNAMIC_OUTPUT"
 
-jobs:
   build-container:
     runs-on: ${{ vars.RUNS_ON }}
     needs: set-vars
