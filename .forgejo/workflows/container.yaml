@@ -16,7 +16,7 @@ env:
 
 jobs:
   build-container:
-    runs-on: shell
+    runs-on: ${{ vars.RUNS_ON }}
 
     strategy:
       matrix:
