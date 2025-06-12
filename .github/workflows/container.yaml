@@ -24,7 +24,7 @@ jobs:
         id: set_output # Important: give this step an ID to reference its outputs
         run: |
           echo "container-name=${{ env.CONTAINER_NAME }}" >> "$GITHUB_OUTPUT"
-          echo "Set container-name to: $DYNAMIC_OUTPUT"
+          echo "Set container-name to: ${{ env.CONTAINER_NAME }}"
 
   build-container:
     runs-on: ${{ vars.RUNS_ON }}
