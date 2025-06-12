@@ -25,12 +25,12 @@ jobs:
         run: |
           REGISTRY_NAME="${{ github.server_url }}"
           REGISTRY_NAME=$(echo ${REGISTRY_NAME} | sed "s#https://##g")
-          if [[ "${REGISTRY_NAME}" == "github.com" ]]
+          if [[ "${REGISTRY_NAME}" -eq "github.com" ]]
           then
             REGISTRY_NAME="ghcr.io"
           fi
           echo "registry-path=${REGISTRY_NAME}" >> "$GITHUB_OUTPUT"
-          echo "Set registry-name to: ${CONTAINER_NAME}"
+          echo "Set registry-name to: ${REGISTRY_NAME}"
 
           CONTAINER_NAME=${{ github.repository }}
           REPO_OWNER=${{ github.repository_owner }}
