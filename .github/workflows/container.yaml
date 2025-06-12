@@ -29,7 +29,7 @@ jobs:
           then
             REGISTRY_NAME="ghcr.io"
           fi
-          echo "registry-path=${REGISTRY_NAME}" >> "$GITHUB_OUTPUT"
+          echo "registry-name=${REGISTRY_NAME}" >> "$GITHUB_OUTPUT"
           echo "Set registry-name to: ${REGISTRY_NAME}"
 
           CONTAINER_NAME=${{ github.repository }}
