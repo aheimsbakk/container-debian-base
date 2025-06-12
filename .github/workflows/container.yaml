@@ -29,6 +29,8 @@ jobs:
   build-container:
     runs-on: ${{ vars.RUNS_ON }}
     needs: set-vars
+    permissions:
+      packages: write
     strategy:
       matrix:
         container:
