@@ -24,14 +24,14 @@ jobs:
           - build-args: |
               RELEASE=bookworm
             tags: |
-              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:latest
-              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:bookworm
+              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:latest
+              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:bookworm
             platforms: linux/amd64,linux/arm64
             containerfile: Containerfile
           - build-args: |
               RELEASE=trixie
             tags: |
-              ${{ secrets.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:trixie
+              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:trixie
             platforms: linux/amd64,linux/arm64
             containerfile: Containerfile
 
@@ -43,7 +43,7 @@ jobs:
         if: ${{ ! contains(github.api_url, 'github' )
         uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.REGISTRY_NAME }}
+          registry: ${{ vars.REGISTRY_NAME }}
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
 
