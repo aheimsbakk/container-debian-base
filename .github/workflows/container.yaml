@@ -25,7 +25,7 @@ jobs:
         run: |
           REGISTRY_NAME="${{ github.server_url }}"
           REGISTRY_NAME=$(echo ${REGISTRY_NAME} | sed "s#https://##g")
-          if [[ "${REGISTRY_NAME}" -eq "github.com" ]]
+          if [[ "${REGISTRY_NAME}" == "github.com" ]]
           then
             REGISTRY_NAME="ghcr.io"
           fi
