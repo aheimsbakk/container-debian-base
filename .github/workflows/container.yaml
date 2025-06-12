@@ -16,7 +16,7 @@ env:
 
 jobs:
   set-vars:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNS_ON }}
     outputs:
       container-name: ${{ steps.set_output.outputs.container-name }}
     steps:
