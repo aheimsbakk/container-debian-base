@@ -2,8 +2,8 @@
 on:
   push:
     paths:
-      - '.forgejo/**/*.yaml'
-      - '.forgejo/**/*.yml'
+      - '.github/**/*.yaml'
+      - '.github/**/*.yml'
       - 'Containerfile'
       - 'Dockerfile'
   workflow_dispatch:
