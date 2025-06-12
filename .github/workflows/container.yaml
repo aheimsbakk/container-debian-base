@@ -15,23 +15,35 @@ env:
   CONTAINER_KEEP_COUNT: 6
 
 jobs:
+  set-vars:
+    runs-on: ubuntu-latest
+    outputs:
+      container-name: ${{ steps.set_output.outputs.container-name }}
+    steps:
+      - name: Set output variable
+        id: set_output # Important: give this step an ID to reference its outputs
+        run: |
+          echo "container-name=${{ env.CONTAINER_NAME }}" >> "$GITHUB_OUTPUT"
+          echo "Set container-name to: $DYNAMIC_OUTPUT"
+
+jobs:
   build-container:
     runs-on: ${{ vars.RUNS_ON }}
-
+    needs: set-vars
     strategy:
       matrix:
         container:
           - build-args: |
               RELEASE=bookworm
             tags: |
-              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:latest
-              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:bookworm
+              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ needs.set-vars.outputs.container-name }}:latest
+              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ needs.set-vars.outputs.container-name }}:bookworm
             platforms: linux/amd64,linux/arm64
             containerfile: Containerfile
           - build-args: |
               RELEASE=trixie
             tags: |
-              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ env.CONTAINER_NAME }}:trixie
+              ${{ vars.REGISTRY_NAME }}/${{ github.repository_owner }}/${{ needs.set-vars.outputs.container-name }}:trixie
             platforms: linux/amd64,linux/arm64
             containerfile: Containerfile
 
@@ -76,6 +88,6 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
           package-type: container
-          package-name: ${{ env.CONTAINER_NAME }}
+          package-name: ${{ needs.set-vars.outputs.container-name }}
           min-versions-to-keep: ${{ env.CONTAINER_KEEP_COUNT }}
           delete-only-untagged-versions: true
