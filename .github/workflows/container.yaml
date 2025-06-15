@@ -42,6 +42,7 @@ jobs:
   build-container:
     runs-on: ${{ vars.RUNS_ON }}
     needs: set-vars
+    name: ${{ matrix.container.build-args }}
     permissions:
       packages: write
     strategy:
